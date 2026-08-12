@@ -120,7 +120,10 @@ def api_resolve():
 
     with resolve_lock:
         try:
-            result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+            # 90s de margen: resolver formato con yt-dlp a veces tarda
+            # mas de lo que uno esperaria, sobre todo si YouTube esta
+            # lento respondiendo o hay reintentos internos.
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=90)
         except subprocess.TimeoutExpired:
             return jsonify({"ok": False, "error": "yt-dlp tardo demasiado en responder"}), 504
 
