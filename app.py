@@ -12,8 +12,9 @@ from flask_cors import CORS
 # Tu(s) dominio(s) de Hostinger. Sin esto el navegador bloquea las
 # respuestas por CORS aunque el servidor si responda bien.
 ALLOWED_ORIGINS = [
-       "https://vakodesign.github.io",
-   ]
+    "https://swapclip.duckdns.org",   # cambia esto por tu dominio real de Hostinger
+    "https://www.swapclip.duckdns.org",
+]
 
 # En Render, yt-dlp se instala via pip (esta en requirements.txt), asi
 # que se llama como comando de sistema, no como ruta a un .exe.
@@ -107,6 +108,12 @@ def api_resolve():
         "-f", fmt,
         "--no-playlist",
         "--sleep-requests", "1",
+        # Le pedimos a yt-dlp que se identifique como la app de Android
+        # de YouTube en vez de un navegador. Esto a veces evita el
+        # bloqueo "Sign in to confirm you're not a bot" sin necesidad
+        # de usar cookies de ninguna cuenta. No es 100% garantizado:
+        # YouTube cambia esto seguido, puede dejar de funcionar.
+        "--extractor-args", "youtube:player_client=android",
         "-j",
         url,
     ]
