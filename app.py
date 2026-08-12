@@ -12,8 +12,7 @@ from flask_cors import CORS
 # Tu(s) dominio(s) de Hostinger. Sin esto el navegador bloquea las
 # respuestas por CORS aunque el servidor si responda bien.
 ALLOWED_ORIGINS = [
-    "https://swapclip.duckdns.org",   # cambia esto por tu dominio real de Hostinger
-    "https://www.swapclip.duckdns.org",
+    "vakodesign.github.io",   # cambia esto por tu dominio real de Hostinger
 ]
 
 # En Render, yt-dlp se instala via pip (esta en requirements.txt), asi
